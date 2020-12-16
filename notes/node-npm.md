@@ -34,3 +34,10 @@ npm update -g
 npm ls --depth=0 --link=true
 npm ls -g --depth=0 --link=true
 ```
+
+### Run local npm package
+
+```shell
+$(npm bin)/<package>
+npx <package>
+```

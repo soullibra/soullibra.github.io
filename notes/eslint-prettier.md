@@ -79,15 +79,35 @@ nano package.json
   ...
 ```
 
-`.prettierrc`
+`.editorconfig`
+
+```ini
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+indent_style = space
+max_line_length = 120
+indent_size = 4
+trim_trailing_whitespace = true
+
+[*.md]
+max_line_length = off
+trim_trailing_whitespace = false
+```
+
+`.prettierrc.json`
 
 ```json
 {
+  "trailingComma": "es5",
+  "tabWidth": 4,
   "semi": true,
   "singleQuote": true,
-  "tabWidth": 2,
-  "trailingComma": "es5",
-  "useTabs": false
+  "useTabs": false,
+  "printWidth": 120
 }
 ```
 
@@ -95,7 +115,47 @@ nano package.json
 
 ```json
 {
-  "extends": ["airbnb-base", "plugin:prettier/recommended"]
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:prettier/recommended",
+    "plugin:cypress/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "./"
+  },
+  "plugins": ["@typescript-eslint", "import"],
+  "rules": {
+    "import/prefer-default-export": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "no-plusplus": ["warn", { "allowForLoopAfterthoughts": true }],
+    "prefer-destructuring": "off",
+    "no-shadow": "off",
+    "class-methods-use-this": "off",
+    "@typescript-eslint/no-shadow": ["error"],
+    "@typescript-eslint/no-inferrable-types": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  }
 }
 ```
 
