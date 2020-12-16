@@ -18,7 +18,7 @@ $(npm bin)/tsc -v
 $(npm bin)/tsc --init
 ```
 
-Edit `package.json`  
+Edit `package.json`
 Edit `tsconfig.json`
 
 ### Express
@@ -43,10 +43,11 @@ npm run dev
 `package.json`
 
 ```json
+  "private": true,
   "scripts": {
     "build": "tsc",
     "start": "NODE_ENV=production node ./build/index.js",
-    "dev": "ts-node-dev --respawn --transpileOnly ./src/index.ts",
+    "dev": "ts-node-dev --respawn --transpile-only ./src/index.ts",
   },
 ```
 
@@ -55,11 +56,26 @@ npm run dev
 ```json
 {
   "compilerOptions": {
+    "target": "es6",
     "module": "commonjs",
+    "lib": ["es2017", "dom"],
     "outDir": "./build",
+    "rootDir": "./src",
     "strict": true,
-    ...
+    "noImplicitReturns": true,
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "paths": {
+      "@config/*": ["config/*"]
+    },
+    "types": ["node"],
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
   },
+  "exclude": [
+    "node_modules"
+  ],
   "include": [
     "src/**/*.ts"
   ]
